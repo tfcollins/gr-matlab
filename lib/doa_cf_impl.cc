@@ -58,6 +58,7 @@ namespace gr {
     void
     doa_cf_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
+    	// Forcast not needed since block is 1:1.  Input is a vector output is a scalar
         /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
     }
 
