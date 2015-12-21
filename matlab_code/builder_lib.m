@@ -17,7 +17,7 @@ if result.summary.passed
     system(['cp ',pwd,'/codegen/dll/music_from_matlab/rt_defines.h ../include/']);
     system(['cp ',pwd,'/codegen/dll/music_from_matlab/rt_nonfinite.h ../include/']);
     
-    system(['rm -rf ',pwd,'/codegen']);
+    %system(['rm -rf ',pwd,'/codegen']);
     
     disp('Build Completed Successfully');
 else

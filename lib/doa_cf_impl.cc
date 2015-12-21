@@ -58,8 +58,8 @@ namespace gr {
     void
     doa_cf_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
-    	// Forcast not needed since block is 1:1.  Input is a vector output is a scalar
-        /* <+forecast+> e.g. ninput_items_required[0] = noutput_items */
+    	// Forcast not needed since block is 1:1.
+        ninput_items_required[0] = noutput_items; 
     }
 
     int
@@ -75,29 +75,35 @@ namespace gr {
 
         float *out = (float*) output_items[0];
         int noutput = noutput_items;
+	int indexOffset = 0;
 
         // Convert to MATLAB compatable type
         creal_T input_mat_ant1[4096];
         creal_T input_mat_ant2[4096];
         creal_T input_mat_ant3[4096];
         creal_T input_mat_ant4[4096];
-        for (int i=0; i<4096; i++)
-        {
-                input_mat_ant1[i].re = in1[i].real();
-                input_mat_ant1[i].im = in1[i].imag();
 
-                input_mat_ant2[i].re = in2[i].real();
-                input_mat_ant2[i].im = in2[i].imag();
+	for (int vec=0; vec<noutput; vec++)
+	{
+		indexOffset = vec*4096;
+		for (int i=0; i<4096; i++)
+		{
+			input_mat_ant1[i].re = in1[indexOffset+i].real();
+			input_mat_ant1[i].im = in1[indexOffset+i].imag();
 
-                input_mat_ant3[i].re = in3[i].real();
-                input_mat_ant3[i].im = in3[i].imag();
+			input_mat_ant2[i].re = in2[indexOffset+i].real();
+			input_mat_ant2[i].im = in2[indexOffset+i].imag();
 
-                input_mat_ant4[i].re = in4[i].real();
-                input_mat_ant4[i].im = in4[i].imag();
+			input_mat_ant3[i].re = in3[indexOffset+i].real();
+			input_mat_ant3[i].im = in3[indexOffset+i].imag();
+
+			input_mat_ant4[i].re = in4[indexOffset+i].real();
+			input_mat_ant4[i].im = in4[indexOffset+i].imag();
+		}
+
+		// Pass to MATLAB generated C++ function
+		out[vec] = (float) music_from_matlab(input_mat_ant1, input_mat_ant2, input_mat_ant3, input_mat_ant4);
         }
-        // Pass to MATLAB generated C++ function
-        out[0] = (float) music_from_matlab(input_mat_ant1, input_mat_ant2, input_mat_ant3, input_mat_ant4);
-        noutput_items = 1;
 
         // Tell runtime system how many input items we consumed on
         // each input stream.
