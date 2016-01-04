@@ -1,5 +1,5 @@
 # gr-matlab
-Example gnuradio block that used codegenerated function from MATLAB.
+Example gnuradio block that used codegenerated function from MATLAB.  The example is for the estimation of DoA using four input streams with a RootMUSIC algorithm.
 
 Generating from MATLAB directly can allow you to easily import complex mathematical functions into gnuradio processing blocks.  Since, lets be honest, most of us start in MATLAB anyway.
 
