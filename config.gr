@@ -1,0 +1,20 @@
+# configuration file for doa flowgraph
+#
+# Notes:
+# - From antenna spacing carrier frequency is selected
+# - gains are in absolute dB (0-~30)
+# - Antenna spacing is in meters
+# - sample_rate must be 100e6/N, where N is base 2 and > 4
+
+[system]
+sample_rate=1562500
+cal_tone_freq=1024#Hz
+
+[rx]
+rx_gain = 0
+antenna_spacing=0.06
+samples_to_save=2**14
+gain_correct_input=0
+
+[tx]
+tx_gain = 0

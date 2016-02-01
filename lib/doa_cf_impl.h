@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2015 <+YOU OR YOUR COMPANY+>.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -23,23 +23,28 @@
 
 #include <matlab/doa_cf.h>
 
+//MATLAB Datatypes
+#include "rtwtypes.h"
+
 namespace gr {
   namespace matlab {
 
     class doa_cf_impl : public doa_cf
     {
      private:
-      // Nothing to declare in this block.
+      creal_T* d_input_mat_ant1;
+      creal_T* d_input_mat_ant2;
+      creal_T* d_input_mat_ant3;
+      creal_T* d_input_mat_ant4;
 
      public:
       doa_cf_impl();
       ~doa_cf_impl();
 
       // Where all the action really happens
-      void forecast (int noutput_items, gr_vector_int &ninput_items_required);
+      //void forecast (int noutput_items, gr_vector_int &ninput_items_required);
 
-      int general_work(int noutput_items,
-		       gr_vector_int &ninput_items,
+      int work(int noutput_items,
 		       gr_vector_const_void_star &input_items,
 		       gr_vector_void_star &output_items);
     };
@@ -48,4 +53,3 @@ namespace gr {
 } // namespace gr
 
 #endif /* INCLUDED_MATLAB_DOA_CF_IMPL_H */
-

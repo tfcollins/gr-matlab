@@ -1,2 +1,4 @@
 codegen/
 *.m~
+build/
+*.so
