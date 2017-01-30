@@ -10,28 +10,14 @@ channel4 = read_complex_binary([str,num2str(test),'/channel3_complex_1_6_2015.bi
 
 frameSize = 4096;
 frames = floor(length(channel1)/frameSize);
-
 estimates = zeros(2,frames);
-
-% spacing = 0.05;
-% lambda = spacing*2;
-% fc = physconst('LightSpeed')/lambda;
-% 
-% fc = 2.4e9;
-% fs = 100e6/64;
-% elements = 4;
-% lambda = physconst('LightSpeed')/fc;
-% spacing = lambda/2
 
 for frame = 1:frames
     
     start = (frame-1)*frameSize+1;
     stop = frame*frameSize;
-    
     doa_est = music_from_matlab(channel1(start:stop),channel2(start:stop),channel3(start:stop),channel4(start:stop));
-    
-    %disp(['Angle Est: ',num2str(doa_est)]);
-    
+    disp(['Angle Est: ',num2str(doa_est)]);
     estimates(:,frame) = doa_est;
     
 end
